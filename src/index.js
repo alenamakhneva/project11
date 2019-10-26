@@ -1,3 +1,3 @@
-const serverUrl = NODE_ENV === 'development' ? 'http://praktikum.tk/cohort03' : 
-        'https://praktikum.tk/cohort03';
+export const serverUrl = NODE_ENV === 'development' ? 'http://praktikum.tk/cohort3' : 
+        'https://praktikum.tk/cohort3';
 import "./style.css";

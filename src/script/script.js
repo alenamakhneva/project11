@@ -20,28 +20,19 @@ const api = new Api({
 });
 
 api.getProfile().then((user) => {
-  /**
-   * Можно улучшить
-   * 
-   * Для защиты от ошибок лучше проверять наличие всех ключей в запросе
-   * if (user.name && user.about) { обновляем разметку }
-   */
+   if (user.name && user.about) {  
   initialName.textContent = user.name
   initialJob.textContent = user.about
   initialAvatar.setAttribute('style', "background-image: url(" + user.avatar + ")")
+}
 })
 
 let cardList
 
 api.getInitialCards().then(cards => {
-  /**
-   * Для защиты от ошибок лучше проверять наличие количества элементов в массиве
-   * если карточек нет в консоли будет ошибка
-   * 
-   * проверка if (cards && cards.length > 0) поможет избежать остановки работы приложения
-   * 
-   */
+ if (cards && cards.length > 0) {
   cardList = new CardList(placesList, cards)
+}
 });
 
 
@@ -66,18 +57,13 @@ document.querySelector('#profile-form')
     event.preventDefault()
     let name = document.querySelector('#username').value
     let about = document.querySelector('#job').value
-    // Лучше использовать const - нет перезаписи данных
     api.editProfile(name, about)
-
-    // Можно улучшить
-    // В ответе приходят записанные данные - 
-    // следует выполнять then в запросе редактирования
-    // getProfile получает старые данные
     
     api.getProfile().then(user => {
-      // лучше проверять наличие данных перед отрисовкой
+      if (user.name && user.about) {
       initialName.textContent = user.name
       initialJob.textContent = user.about
+      }
     })
   })
 
@@ -88,8 +74,6 @@ document.querySelector('#place-form')
     let link = document.querySelector('#place-link').value //const
     api.addMyCard(name, link).then((card) => {
       cards.push(new Card(card.name, card.link))
-      // Можно улучшить - не обязательно
-      // не очень понятно куда добавляется карточка
-      // лучше делать cardList.addCard
+    
     })
   })
