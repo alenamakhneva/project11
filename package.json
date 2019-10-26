@@ -1,0 +1,35 @@
+{
+  "name": "yandex_praktikum",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "webpack --mode production",
+    "dev": "webpack-dev-server --mode development --open"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alenamakhneva/alenamakhneva.github.io-project11.git"
+  },
+  "author": "Alena Makhneva",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/alenamakhneva/alenamakhneva.github.io-project11/issues"
+  },
+  "homepage": "https://github.com/alenamakhneva/alenamakhneva.github.io-project11#readme",
+  "devDependencies": {
+    "@babel/cli": "^7.6.4",
+    "@babel/core": "^7.6.4",
+    "@babel/preset-env": "^7.6.3",
+    "babel-loader": "^8.0.6",
+    "css-loader": "^3.2.0",
+    "mini-css-extract-plugin": "^0.8.0",
+    "webpack": "^4.41.2",
+    "webpack-cli": "^3.3.9"
+  },
+  "dependencies": {
+    "babel-polyfill": "^6.26.0",
+    "core-js": "^3.1.4",
+    "webpack-dev-server": "^3.9.0"
+  }
+}
