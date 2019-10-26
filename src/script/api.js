@@ -1,6 +1,6 @@
 class Api {
     constructor(options) {
-        this.baseUrl = options.baseUrl
+        this.serverUrl = options.serverUrl
         this.headers = options.headers        
         /**
          * Можно улучшить
@@ -26,7 +26,7 @@ class Api {
          * 
          * токен из полей класса лучше получать
          */
-        return fetch(`${this.baseUrl}/users/me`, {
+        return fetch(`${this.serverUrl}/users/me`, {
                 headers: {
                     authorization: this.headers.authorization,
                     'Content-Type': 'application/json'
@@ -69,26 +69,19 @@ class Api {
     }
 
     editProfile(name, about) { // редактирование профиля
-        return fetch(`${this.baseUrl}/users/me`, {
+        return fetch(`${this.serverUrl}/users/me`, {
                 method: 'PATCH',
                 headers: {
                     authorization: this.headers.authorization,
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({
-                    name: name,
-                    about: about
-                }) // Можно улучшить имена переменных можно не дублировать при совпадении
-                // с ключами ({ name, about }) достаточно
+                body: JSON.stringify({ name,about }) 
             })
             .then(res => {
                 if (res.ok) {
                     return res.json();
                 }
                 return Promise.reject(`Ошибка: ${res.status}`);
-            })
-            .then(res => {
-                console.log(res) // Можно обойтись одним then
             })
 
             .catch((err) => {
@@ -105,10 +98,7 @@ class Api {
                     authorization: this.headers.authorization,
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({
-                    name: name,
-                    link: link
-                }) // ({ name, link })
+                body: JSON.stringify({ name, link })
             })
             .then(res => {
                 if (res.ok) {

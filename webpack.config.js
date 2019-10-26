@@ -6,12 +6,15 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin'); 
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const isDev = process.env.NODE_ENV === 'development';
+new webpack.DefinePlugin({
+    'NODE_ENV': JSON.stringify(process.env.NODE_ENV)
+   })
 
 module.exports = {
     entry: { main: './src/index.js' },
     output: {
         path: path.resolve(__dirname, 'dist'),
-        filename: 'main.js'
+        filename: '[name].[chunkhash].js'
     },
     module: {
         rules: [{ 
@@ -21,15 +24,20 @@ module.exports = {
                 },
                 {
             test: /\.css$/, 
-            use: [MiniCssExtractPlugin.loader, 'css-loader'] 
+            use:  [MiniCssExtractPlugin.loader, 'css-loader', 'postcss-loader']
                 },
             
             ]
             },
     plugins: [
         new MiniCssExtractPlugin({
-            filename: 'style.css'
-            })
+            filename: 'style.[contenthash].css'
+            }),
+        new HtmlWebpackPlugin({
+            inject: false,  
+            template: './src/index.html', 
+            filename: 'index.html' 
+          })
             ]
 }
 
