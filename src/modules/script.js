@@ -1,3 +1,8 @@
+import { Api, serverUrl, authorization } from "./api.js"
+import { Popup, ProfileEdit, UserCard} from "./popups.js";
+import { Card, CardList } from "./card.js";
+
+//Переменные
 const placesList = document.querySelector('.places-list')
 const addButton = document.querySelector('.user-info__button')
 const editButton = document.querySelector('.user-info__edit-button')
@@ -10,11 +15,12 @@ const errorMessages = {
   link: 'Здесь должна быть ссылка'
 }
 
+
 //запросы на сервер
 const api = new Api({
-  baseUrl: 'http://95.216.175.5/cohort3',
+  serverUrl, 
   headers: {
-    authorization: 'b025614a-04c1-416e-94c9-d1a74837e2eb',
+    authorization: authorization,
     'Content-Type': 'application/json'
   }
 });
@@ -77,3 +83,5 @@ document.querySelector('#place-form')
     
     })
   })
+
+  export { errorMessages, placesList, initialName };

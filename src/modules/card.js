@@ -1,3 +1,5 @@
+import { placesList } from "./script"
+
 class Card {
   constructor(name, link) {
     this.name = name
@@ -88,3 +90,5 @@ class CardList {
       this.addCard(name, link))
   }
 }
+
+export { Card, CardList };

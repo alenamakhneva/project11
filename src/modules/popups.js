@@ -1,3 +1,5 @@
+import { errorMessages, initialName } from "./script.js"
+
 class Popup {
   constructor(container) {
     this.container = container
@@ -102,3 +104,5 @@ class UserCard extends PopupWithValidation {
     })
   }
 }
+
+export {Popup, ProfileEdit, UserCard};

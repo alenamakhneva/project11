@@ -1,34 +1,18 @@
+const serverUrl = NODE_ENV === 'development' ? 'http://praktikum.tk/cohort3' : 'https://praktikum.tk/cohort3';
+const authorization = 'b025614a-04c1-416e-94c9-d1a74837e2eb';
+
 class Api {
-    constructor(options) {
-        this.serverUrl = options.serverUrl
-        this.headers = options.headers        
-        /**
-         * Можно улучшить
-         * 
-         * Для создания коротких переменных удобно разбирать входящие объекты
-         * 
-         * https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment
-         * 
-         * constructor({ baseUrl, headers: { authorization } }) {
-         *  this.baseUrl = baseUrl
-         *  this.token = authorization
-         * }
-         */
+    constructor({ serverUrl, headers: { authorization } }) {
+        this.serverUrl = serverUrl
+        this.token = authorization     
+        
     }
 
     getProfile() { // запрос исходных данных пользователя
-        /**
-         * Надо исправить
-         * 
-         * Адреса запросов составляются из переменной
-         * из запроса возвращается результат через
-         * return fetch(`${this.url}/users/me`)
-         * 
-         * токен из полей класса лучше получать
-         */
+        
         return fetch(`${this.serverUrl}/users/me`, {
                 headers: {
-                    authorization: this.headers.authorization,
+                    authorization: this.token,
                     'Content-Type': 'application/json'
                 }
             })
@@ -41,7 +25,7 @@ class Api {
 
             .then((user) => {
                 return user
-            }) // Можно улучшить в запросе достаточно первого then
+            }) 
             .catch((err) => {
                 console.log(err);
             });
@@ -49,9 +33,9 @@ class Api {
 
     getInitialCards() { // начальный список карточек
 
-        return fetch(`${this.baseUrl}/cards`, {
+        return fetch(`${this.serverUrl}/cards`, {
                 headers: {
-                    authorization: this.headers.authorization,
+                    authorization: this.token,
                     'Content-Type': 'application/json'
                 }
             })
@@ -72,7 +56,7 @@ class Api {
         return fetch(`${this.serverUrl}/users/me`, {
                 method: 'PATCH',
                 headers: {
-                    authorization: this.headers.authorization,
+                    authorization: this.token,
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({ name,about }) 
@@ -92,10 +76,10 @@ class Api {
 
     addMyCard(name, link) { // добавление новой карточки
 
-        return fetch(`${this.baseUrl}/cards`, {
+        return fetch(`${this.serverUrl}/cards`, {
                 method: 'POST',
                 headers: {
-                    authorization: this.headers.authorization,
+                    authorization: this.token,
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({ name, link })
@@ -114,12 +98,4 @@ class Api {
     }
 }
 
-/**
- * Класс для работы с данными огранизован аккуратно
- * 
- * Обратите внимание на вызовы методов
- * Достаточно запускать запрос редактирования и брать данные
- * из ответа, так на странице будут подставляться новые данные
- * сразу после ответа сервера, второй запрос getUser лишний
- * ответ в then редактирования лучше брать
- */
+export {Api, serverUrl, authorization};
