@@ -1,4 +1,4 @@
-import { errorMessages, initialName } from "./script.js"
+import { errorMessages, initialName, initialJob } from "./script.js"
 
 class Popup {
   constructor(container) {

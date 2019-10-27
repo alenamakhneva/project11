@@ -41,7 +41,6 @@ api.getInitialCards().then(cards => {
 }
 });
 
-
 // создание попапа для картинки
 const cardPopup = document.querySelector('.image-popup')
 const imagePopup = new Popup(cardPopup)
@@ -79,9 +78,9 @@ document.querySelector('#place-form')
     let name = document.querySelector('#placename').value
     let link = document.querySelector('#place-link').value //const
     api.addMyCard(name, link).then((card) => {
-      cards.push(new Card(card.name, card.link))
+      cardList.addCard(card.name, card.link)
     
     })
   })
 
-  export { errorMessages, placesList, initialName };
+  export { errorMessages, placesList, initialName, initialJob };
