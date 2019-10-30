@@ -62,13 +62,14 @@ document.querySelector('#profile-form')
     event.preventDefault()
     let name = document.querySelector('#username').value
     let about = document.querySelector('#job').value
-    api.editProfile(name, about)
+    api.editProfile(name, about).then(data => {
     
     api.getProfile().then(user => {
       if (user.name && user.about) {
       initialName.textContent = user.name
       initialJob.textContent = user.about
       }
+    })
     })
   })
 
